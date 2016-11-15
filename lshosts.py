@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+"""
+lshosts.py - List IPs and domains in ~/.ssh/known_hosts
+"""
+
 from __future__ import print_function
 import os
 import sys
