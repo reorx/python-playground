@@ -11,12 +11,13 @@ def configure_logger(lg, level, log_format=None, propagate=False):
     lg.propagate = propagate
 
 
-def set_logger(name,
-               level='INFO',
-               fmt=None,
-               datefmt=None,
-               propagate=True,
-               remove_handlers=False):
+def set_logger(
+    name,
+    level='INFO',
+    fmt='%(asctime)s [%(levelname)-5s] %(name)s: %(message)s',
+    datefmt=None,
+    propagate=True,
+    remove_handlers=False):
     """
     This function will clear the previous handlers and set only one handler,
     which will only be StreamHandler for the logger.
@@ -44,7 +45,8 @@ def set_logger(name,
         logger.addHandler(handler)
 
     formatter_kwgs = {}
-    for i in ('fmt', 'datefmt'):
-        if locals()[i] is not None:
-            formatter_kwgs[i] = locals()[i]
+    if fmt is not None:
+        formatter_kwgs['fmt'] = fmt
+    if datefmt is not None:
+        formatter_kwgs['datefmt'] = datefmt
     handler.setFormatter(logging.Formatter(**formatter_kwgs))
